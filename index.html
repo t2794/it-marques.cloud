@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://trusted.cdn.com; style-src 'self' https://trusted.cdn.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
@@ -16,27 +16,98 @@
     <title>Sicheres Dashboard</title>
     
     <!-- Styling -->
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        #login-form, #dashboard {
+            display: none;
+            margin-top: 20px;
+        }
+        #dashboard {
+            display: none;
+        }
+        .input-group {
+            margin: 10px 0;
+        }
+        input[type="password"], input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            cursor: pointer;
+            background-color: #333;
+            color: #fff;
+            border: none;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 10px 0;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1>Dashboard</h1>
-    </header>
+    <h1>Passwortgeschütztes Dashboard</h1>
 
-    <nav>
-        <ul>
-            <li><a href="https://example1.com" target="_blank" rel="noopener noreferrer">Link 1</a></li>
-            <li><a href="https://example2.com" target="_blank" rel="noopener noreferrer">Link 2</a></li>
-            <li><a href="https://example3.com" target="_blank" rel="noopener noreferrer">Link 3</a></li>
-        </ul>
-    </nav>
+    <!-- Login Form -->
+    <div id="login-form">
+        <p>Bitte geben Sie das Passwort ein, um fortzufahren:</p>
+        <div class="input-group">
+            <input type="password" id="password" placeholder="Passwort eingeben">
+        </div>
+        <input type="submit" value="Anmelden" onclick="validatePassword()">
+        <p id="error-message" style="color: red; display: none;">Falsches Passwort. Bitte versuchen Sie es erneut.</p>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 Sicheres Dashboard</p>
-    </footer>
-    
-    <script src="https://trusted.cdn.com/somescript.js"></script>
+    <!-- Dashboard -->
+    <div id="dashboard">
+        <h2>Willkommen im Dashboard</h2>
+        <nav>
+            <ul>
+                <li><a href="https://example1.com" target="_blank" rel="noopener noreferrer">Link 1</a></li>
+                <li><a href="https://example2.com" target="_blank" rel="noopener noreferrer">Link 2</a></li>
+                <li><a href="https://example3.com" target="_blank" rel="noopener noreferrer">Link 3</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        // Passwort sollte sicherer und verschlüsselt auf dem Server gespeichert werden
+        const correctPasswordHash = "e99a18c428cb38d5f260853678922e03"; // Beispiel MD5-Hash für "abc123"
+
+        function md5(string) {
+            // Eine einfache MD5-Funktion (als Beispiel)
+            // Diese Funktion sollte in der Praxis nicht verwendet werden.
+            return CryptoJS.MD5(string).toString();
+        }
+
+        function validatePassword() {
+            const inputPassword = document.getElementById("password").value;
+            const inputPasswordHash = md5(inputPassword);
+
+            if (inputPasswordHash === correctPasswordHash) {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
+            } else {
+                document.getElementById("error-message").style.display = "block";
+            }
+        }
+
+        // On page load, show the login form
+        window.onload = function() {
+            document.getElementById("login-form").style.display = "block";
+        };
+    </script>
+
+    <!-- In der Praxis würde man CryptoJS von einer vertrauenswürdigen Quelle laden -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 </body>
 
 </html>
