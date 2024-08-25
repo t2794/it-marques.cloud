@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://trusted.cdn.com; style-src 'self' https://trusted.cdn.com; object-src 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload">
+    <meta name="Referrer-Policy" content="no-referrer-when-downgrade">
+    
+    <title>Sicheres Dashboard</title>
+    
+    <!-- Styling -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>Dashboard</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="https://example1.com" target="_blank" rel="noopener noreferrer">Link 1</a></li>
+            <li><a href="https://example2.com" target="_blank" rel="noopener noreferrer">Link 2</a></li>
+            <li><a href="https://example3.com" target="_blank" rel="noopener noreferrer">Link 3</a></li>
+        </ul>
+    </nav>
+
+    <footer>
+        <p>&copy; 2024 Sicheres Dashboard</p>
+    </footer>
+    
+    <script src="https://trusted.cdn.com/somescript.js"></script>
+</body>
+
+</html>
